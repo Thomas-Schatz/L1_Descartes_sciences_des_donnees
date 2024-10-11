@@ -1,0 +1,134 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\geometry{hmargin=2.5cm,vmargin=2.5cm}
+
+\title{TD 1 : Faire parler les données}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Exercice 1 : Analyse de la fréquentation de parcs d'attraction}
+
+Vous disposez des données annuelles ci-dessous sur le nombre de visiteurs de deux parcs d'attractions (source \url{https://queue-times.com/fr/parks/9/attendances} et \url{https://queue-times.com/fr/parks/4/attendances}).
+
+
+\begin{center}
+\textbf{Tableau 1 : Fréquentation annuelle du \textit{Parc Astérix}}\\
+
+\vspace{.2cm}
+
+\begin{tabular}{c|c}
+Année & Nombre de visiteurs \\
+\hline
+2023 & 2 815 000 \\
+2022 & 2 632 000 \\
+2021 & 1 300 000 \\
+2020 & 1 163 000 \\
+2019 & 2 326 000 \\
+2018 & 2 174 000 \\
+2017 & 2 000 000 \\
+2016 & 1 850 000 \\
+2015 & 1 850 000 \\
+2014 & 1 800 000 \\
+%2013 & 1 620 000 \\
+%2012 & 1 723 000 \\
+%2011 & 1 595 000 \\
+%2010 & 1 663 000 \\
+%2009 & 1 820 000 \\
+%2008 & 1 800 000 \\
+%2007 & 1 620 000 \\
+%2006 & 1 800 000 \\
+\end{tabular}
+
+\vspace{1cm}
+
+\textbf{Tableau 2 : Fréquentation annuelle de \textit{Disneyland Paris}}\\
+
+\vspace{.2cm}
+
+\begin{tabular}{c|c}
+Année & Nombre de visiteurs \\
+\hline
+2023 & 10 400 000 \\
+2022 & 9 930 000 \\
+2021 & 3 500 000 \\
+2020 & 2 620 000 \\
+2019 & 9 745 000 \\
+2018 & 9 843 000 \\
+2017 & 9 660 000 \\
+2016 & 8 400 000 \\
+2015 & 9 790 000 \\
+2014 & 9 940 000 \\
+%2013 & 10 430 000 \\
+%2012 & 11 200 000 \\
+%2011 & 10 990 000 \\
+%2010 & 10 500 000 \\
+%2009 & 12 740 000 \\
+%2008 & 12 688 000 \\
+%2007 & 12 000 000 \\
+%2006 & 10 600 000 \\
+\end{tabular}
+\end{center}
+
+\subsection*{Partie 1 : Statistiques descriptives}
+\begin{enumerate}
+    \item Pour éviter des calculs trop pénibles, commencez par changer l'unité utilisée pour compter les visiteurs en millions et arrondissez à un chiffre après la virgule. Par exemple s'il y a eu 1 588 433 visiteurs, nous arrondirons à 1.6 millions. 
+    \item Calculez la moyenne, la médiane et la variance du nombre de visiteurs pour \textit{Disneyland Paris} et pour le \textit{Parc Astérix} sur la période 2014-2023. Que nous révèle cette analyse ?
+    %\item Interprétez la différence entre la moyenne et la médiane dans chaque cas. Qu'est-ce que cela indique sur la répartition des visiteurs au fil des ans ?
+    %\item En observant les résultats de la variance, lequel des deux parcs a connu la plus grande variabilité dans son nombre de visiteurs ? Pourquoi ?
+\end{enumerate}
+
+\subsection*{Partie 2 : Visualisation des données}
+\begin{enumerate}
+    \item Réalisez un histogramme du nombre de visiteurs pour chacun des parcs (séparément) sur la période 2014-2023 en utilisant comme bacs pour le parc Astérix :
+    \begin{itemize}
+        \item $[0, 1($,
+        \item $[1; 1.5($,
+        \item $[1.5; 2($,
+        \item $[2; 3($,
+        \item $[3; +\infty($
+    \end{itemize}
+    et pour Disneyland Paris :
+    \begin{itemize}
+        \item $[0; 2($,
+        \item $[2; 8($,
+        \item $[8; 9($,
+        \item $[9; 10($,
+        \item $[10; +\infty($
+    \end{itemize}
+    \item Qu'avez-vous utilisé pour l'axe vertical (axe des y) de vos histogrammes à la question précédente? Si vous avez utilisé le nombre de points de données tombant dans chaque bac, refaites les graphes en utilisant le principe de l'aire vu en cours (hauteur d'un bac $=$ nombre de points dans le bac divisé par (nombre de points total $\times$ largeur du bac). Si vous aviez déjà utilisé le principe de l'aire, refaites l'histogramme en utilisant comme hauteur le nombre de points de données tombant dans chaque bac. Quelle version est la plus utile ?
+    \item Superposez la moyenne et la médiane sur vos histogrammes et commentez. 
+    \item Tracez un graphe linéaire (\textit{line plot}) représentant le nombre de visiteurs pour chaque parc en fonction de l'année. Quelle conclusion pouvez-vous tirer en ce qui concerne les tendances des deux parcs au fil du temps, notamment pendant les années 2020-2021 ?
+    \item Réalisez un graphe de dispersion (\textit{scatter plot}) avec le nombre de visiteurs de \textit{Parc Astérix} sur l'axe des x et le nombre de visiteurs de \textit{EuroDisney} sur l'axe des y. Commentez.
+\end{enumerate}
+
+\subsection*{Partie 3 : Manipulation de données tabulées}
+Pour pouvoir réaliser les graphiques ci-dessus automatiquement avec la bibliothèque Python \texttt{seaborn}, il est utile de structurer les données de manière appropriée.
+
+\begin{enumerate}
+    \item Expliquez comment vous pouvez fusionner les deux tableaux de données (\textit{Disneyland Paris} et \textit{Parc Astérix}) en un seul tableau où chaque ligne représente une année, et où les colonnes \textbf{Parc} et \textbf{Nombre de visiteurs} indiquent respectivement le parc (EuroDisney ou Parc Astérix) et le nombre de visiteurs correspondant.
+    \item Pourquoi cette structure de données est-elle plus adaptée pour réaliser des visualisations avec \texttt{seaborn} par rapport à une approche par \textit{jointure}, qui aurait deux colonnes séparées pour le nombre de visiteurs d'\textit{EuroDisney} et de \textit{Parc Astérix} ?  
+    \item Une fois que vous avez le bon tableau, quel serait le code seaborn à utiliser pour générer :
+    \begin{itemize}
+        \item L'histogramme des visiteurs avec les moyennes et médianes superposées ?
+        \item Le \textit{line plot} des visiteurs en fonction du temps pour les deux parcs ?
+        \item Le graphique de corrélation entre les visiteurs des deux parcs ?
+    \end{itemize}
+\end{enumerate}
+
+%\section*{Solutions}
+%\subsection*{Partie 1 : Statistiques descriptives}
+
+%TODO
+
+\end{document}
